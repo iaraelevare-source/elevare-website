@@ -78,14 +78,7 @@
             background-clip: text;
         }
         
-        .animate-fade-in-up {
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-        
-        @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+
         
         .glass-effect {
             backdrop-filter: blur(15px) saturate(180%);
@@ -93,29 +86,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
-        .hover-lift {
-            transition: all 0.3s ease;
-        }
-        
-        .hover-lift:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        
-        .pulse-dot {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
-        }
-        
-        .scroll-reveal.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
+
         
         section, nav, footer {
             position: relative;
@@ -159,12 +130,10 @@
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
                 <div class="flex items-center gap-3 group cursor-pointer">
-                    <div class="w-10 h-10 rounded-xl bg-brand-gradient flex items-center justify-center text-white font-bold text-xl shadow-md group-hover:shadow-lg transition-all duration-300">
-                        E
-                    </div>
+                    <img src="images/elevare_logo_opt.png" alt="Elevare Logo" class="w-12 h-12" width="48" height="48">
                     <div class="flex flex-col">
                         <span class="font-bold text-xl tracking-tight text-gray-900 leading-none">Elevare</span>
-                        <span class="text-[10px] font-medium text-brand-primary tracking-wider uppercase mt-0.5">Tecnologia Estética</span>
+                        <span class="text-[11px] font-medium text-brand-primary tracking-wide uppercase mt-0.5">Estética Estratégica</span>
                     </div>
                 </div>
 
@@ -218,11 +187,11 @@
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-                <button class="bg-brand-gradient text-white px-8 py-4 rounded-full font-medium shadow-2xl shadow-brand-primary/30 hover:-translate-y-1 transition-all duration-300 text-lg hover-lift">
+                <button class="bg-brand-gradient text-white px-8 py-4 rounded-full font-medium shadow-2xl shadow-brand-primary/30 hover:-translate-y-1 transition-all duration-300 text-lg">
                     Ative seus 15 dias grátis
                     <i data-lucide="arrow-right" class="ml-2 w-5 h-5 inline"></i>
                 </button>
-                <a href="#beneficios" class="border border-brand-lavender text-brand-primary px-8 py-4 rounded-full font-medium hover:bg-gray-50 transition-all duration-300 text-lg bg-white hover-lift inline-flex items-center justify-center">
+                <a href="#beneficios" class="border border-brand-lavender text-brand-primary px-8 py-4 rounded-full font-medium hover:bg-gray-50 transition-all duration-300 text-lg bg-white inline-flex items-center justify-center">
                     Conhecer IARA
                 </a>
             </div>
@@ -312,137 +281,25 @@
         </div>
     </section>
 
-    <!-- O Que Elevare Faz -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white border-y border-gray-100">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16 scroll-reveal">
-                <h2 class="text-3xl sm:text-4xl font-bold text-brand-dark mb-4 tracking-tight">O que Elevare faz</h2>
-                <p class="text-lg text-gray-600">Automação inteligente que trabalha 24h por você</p>
-            </div>
 
-            <div class="grid md:grid-cols-2 gap-4">
-                <div class="flex items-center gap-4 p-5 rounded-2xl bg-gray-50 border border-transparent hover:border-brand-lavender hover:bg-white hover:shadow-md transition-all duration-300 group hover-lift scroll-reveal">
-                    <div class="w-8 h-8 rounded-full bg-brand-mint flex items-center justify-center flex-shrink-0 group-hover:bg-brand-primary transition-colors">
-                        <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-primary group-hover:text-white transition-colors"></i>
-                    </div>
-                    <p class="text-gray-700 font-medium group-hover:text-brand-dark">Responde todas as mensagens</p>
-                </div>
-                <div class="flex items-center gap-4 p-5 rounded-2xl bg-gray-50 border border-transparent hover:border-brand-lavender hover:bg-white hover:shadow-md transition-all duration-300 group hover-lift scroll-reveal">
-                    <div class="w-8 h-8 rounded-full bg-brand-mint flex items-center justify-center flex-shrink-0 group-hover:bg-brand-primary transition-colors">
-                        <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-primary group-hover:text-white transition-colors"></i>
-                    </div>
-                    <p class="text-gray-700 font-medium group-hover:text-brand-dark">Envia valores e orientações com precisão</p>
-                </div>
-                <div class="flex items-center gap-4 p-5 rounded-2xl bg-gray-50 border border-transparent hover:border-brand-lavender hover:bg-white hover:shadow-md transition-all duration-300 group hover-lift scroll-reveal">
-                    <div class="w-8 h-8 rounded-full bg-brand-mint flex items-center justify-center flex-shrink-0 group-hover:bg-brand-primary transition-colors">
-                        <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-primary group-hover:text-white transition-colors"></i>
-                    </div>
-                    <p class="text-gray-700 font-medium group-hover:text-brand-dark">Tira dúvidas sem te chamar</p>
-                </div>
-                <div class="flex items-center gap-4 p-5 rounded-2xl bg-gray-50 border border-transparent hover:border-brand-lavender hover:bg-white hover:shadow-md transition-all duration-300 group hover-lift scroll-reveal">
-                    <div class="w-8 h-8 rounded-full bg-brand-mint flex items-center justify-center flex-shrink-0 group-hover:bg-brand-primary transition-colors">
-                        <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-primary group-hover:text-white transition-colors"></i>
-                    </div>
-                    <p class="text-gray-700 font-medium group-hover:text-brand-dark">Cadastra a cliente automaticamente</p>
-                </div>
-                <div class="flex items-center gap-4 p-5 rounded-2xl bg-gray-50 border border-transparent hover:border-brand-lavender hover:bg-white hover:shadow-md transition-all duration-300 group hover-lift scroll-reveal">
-                    <div class="w-8 h-8 rounded-full bg-brand-mint flex items-center justify-center flex-shrink-0 group-hover:bg-brand-primary transition-colors">
-                        <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-primary group-hover:text-white transition-colors"></i>
-                    </div>
-                    <p class="text-gray-700 font-medium group-hover:text-brand-dark">Diferencia curiosidade de interesse real</p>
-                </div>
-                <div class="flex items-center gap-4 p-5 rounded-2xl bg-gray-50 border border-transparent hover:border-brand-lavender hover:bg-white hover:shadow-md transition-all duration-300 group hover-lift scroll-reveal">
-                    <div class="w-8 h-8 rounded-full bg-brand-mint flex items-center justify-center flex-shrink-0 group-hover:bg-brand-primary transition-colors">
-                        <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-primary group-hover:text-white transition-colors"></i>
-                    </div>
-                    <p class="text-gray-700 font-medium group-hover:text-brand-dark">Conduz para o agendamento</p>
-                </div>
-                <div class="flex items-center gap-4 p-5 rounded-2xl bg-gray-50 border border-transparent hover:border-brand-lavender hover:bg-white hover:shadow-md transition-all duration-300 group hover-lift scroll-reveal">
-                    <div class="w-8 h-8 rounded-full bg-brand-mint flex items-center justify-center flex-shrink-0 group-hover:bg-brand-primary transition-colors">
-                        <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-primary group-hover:text-white transition-colors"></i>
-                    </div>
-                    <p class="text-gray-700 font-medium group-hover:text-brand-dark">Confirma agendamentos</p>
-                </div>
-                <div class="flex items-center gap-4 p-5 rounded-2xl bg-gray-50 border border-transparent hover:border-brand-lavender hover:bg-white hover:shadow-md transition-all duration-300 group hover-lift scroll-reveal">
-                    <div class="w-8 h-8 rounded-full bg-brand-mint flex items-center justify-center flex-shrink-0 group-hover:bg-brand-primary transition-colors">
-                        <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-primary group-hover:text-white transition-colors"></i>
-                    </div>
-                    <p class="text-gray-700 font-medium group-hover:text-brand-dark">Marca direto no Google Agenda</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Resultado Real -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-brand-gradient text-white relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]"></div>
-        
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <h2 class="text-3xl sm:text-4xl font-bold mb-12 tracking-tight scroll-reveal">Resultado Real</h2>
-            
-            <div class="grid md:grid-cols-2 gap-12 text-left">
-                <div class="space-y-8">
-                    <div class="flex items-start gap-4 scroll-reveal">
-                        <div class="bg-white/10 p-2 rounded-lg backdrop-blur-sm border border-white/10">
-                            <span class="text-xl font-bold">✓</span>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-lg mb-1 text-white">Zero Perdas</h4>
-                            <p class="text-purple-100 leading-relaxed text-sm opacity-90">Você deixa de perder cliente por falta de resposta. Cada lead é atendido na hora.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-4 scroll-reveal">
-                         <div class="bg-white/10 p-2 rounded-lg backdrop-blur-sm border border-white/10">
-                          <span class="text-xl font-bold">✓</span>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-lg mb-1 text-white">Eficiência Total</h4>
-                            <p class="text-purple-100 leading-relaxed text-sm opacity-90">Você para de repetir as mesmas informações de preço e local mil vezes por dia.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="space-y-8">
-                    <div class="flex items-start gap-4 scroll-reveal">
-                         <div class="bg-white/10 p-2 rounded-lg backdrop-blur-sm border border-white/10">
-                          <span class="text-xl font-bold">✓</span>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-lg mb-1 text-white">Pausas Reais</h4>
-                            <p class="text-purple-100 leading-relaxed text-sm opacity-90">Você volta a respirar entre um atendimento e outro, sem correr para o celular.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-4 scroll-reveal">
-                         <div class="bg-white/10 p-2 rounded-lg backdrop-blur-sm border border-white/10">
-                          <span class="text-xl font-bold">✓</span>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-lg mb-1 text-white">Equilíbrio</h4>
-                            <p class="text-purple-100 leading-relaxed text-sm opacity-90">A vida volta ao seu eixo. Sua clínica funciona, você descansa.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Como IARA Trabalha -->
     <section id="beneficios" class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16 scroll-reveal">
+            <div class="text-center mb-16">
                 <h2 class="text-3xl sm:text-4xl font-bold text-brand-dark mb-4 tracking-tight">Como a IARA trabalha por você</h2>
                 <p class="text-lg text-gray-600">A assistente inteligente que multiplica conversões</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-6">
                 <!-- 1. Atendimento Inteligente -->
-                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
+                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300">
                     <div class="flex items-start gap-5">
                         <div class="p-3 bg-brand-mint rounded-xl flex-shrink-0">
                             <i data-lucide="message-circle" class="w-6 h-6 text-brand-primary"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Atendimento Inteligente</h3>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">Atendimento Inteligente</h3>
                             <p class="text-gray-700 font-semibold mb-2">Atende como humano. Entrega como sistema.</p>
                             <ul class="space-y-1 text-sm text-gray-600">
                                 <li>• Respostas naturais com simulação de digitação</li>
@@ -455,13 +312,13 @@
                 </div>
 
                 <!-- 2. Qualificação Automática -->
-                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
+                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300">
                     <div class="flex items-start gap-5">
                         <div class="p-3 bg-brand-lavender rounded-xl flex-shrink-0">
                             <i data-lucide="user-check" class="w-6 h-6 text-brand-primary"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Qualificação Automática</h3>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">Qualificação Automática</h3>
                             <p class="text-gray-700 font-semibold mb-2">Ela entende quem é quem.</p>
                             <ul class="space-y-1 text-sm text-gray-600">
                                 <li>• Identifica quem está pronto para agendar</li>
@@ -474,13 +331,13 @@
                 </div>
 
                 <!-- 3. Agendamentos & Organização -->
-                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
+                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300">
                     <div class="flex items-start gap-5">
                         <div class="p-3 bg-purple-50 rounded-xl flex-shrink-0">
                             <i data-lucide="calendar-check" class="w-6 h-6 text-brand-primary"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Agendamentos & Organização</h3>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">Agendamentos & Organização</h3>
                             <p class="text-gray-700 font-semibold mb-2">Sua agenda funcionando mesmo quando você não está.</p>
                             <ul class="space-y-1 text-sm text-gray-600">
                                 <li>• Conduz o cliente até o agendamento</li>
@@ -493,13 +350,13 @@
                 </div>
 
                 <!-- 4. Cadastro Automático -->
-                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
+                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300">
                     <div class="flex items-start gap-5">
                         <div class="p-3 bg-blue-50 rounded-xl flex-shrink-0">
                             <i data-lucide="user-plus" class="w-6 h-6 text-brand-primary"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Cadastro Automático</h3>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">Cadastro Automático</h3>
                             <p class="text-gray-700 font-semibold mb-2">Informação organizada sem trabalho manual.</p>
                             <ul class="space-y-1 text-sm text-gray-600">
                                 <li>• Cadastra clientes automaticamente</li>
@@ -512,13 +369,13 @@
                 </div>
 
                 <!-- 5. Recuperação de Conversas -->
-                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
+                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300">
                     <div class="flex items-start gap-5">
                         <div class="p-3 bg-green-50 rounded-xl flex-shrink-0">
                             <i data-lucide="refresh-cw" class="w-6 h-6 text-brand-primary"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Recuperação de Conversas</h3>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">Recuperação de Conversas</h3>
                             <p class="text-gray-700 font-semibold mb-2">Nada fica parado. Nada se perde.</p>
                             <ul class="space-y-1 text-sm text-gray-600">
                                 <li>• Reativa clientes silenciosos</li>
@@ -531,13 +388,13 @@
                 </div>
 
                 <!-- 6. Disparos Estratégicos -->
-                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
+                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300">
                     <div class="flex items-start gap-5">
                         <div class="p-3 bg-pink-50 rounded-xl flex-shrink-0">
                             <i data-lucide="send" class="w-6 h-6 text-brand-primary"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Disparos Estratégicos</h3>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">Disparos Estratégicos</h3>
                             <p class="text-gray-700 font-semibold mb-2">Seu WhatsApp vira uma página de vendas.</p>
                             <ul class="space-y-1 text-sm text-gray-600">
                                 <li>• Envio de campanhas segmentadas</li>
@@ -550,13 +407,13 @@
                 </div>
 
                 <!-- 7. Datas Especiais & Relacionamento -->
-                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
+                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300">
                     <div class="flex items-start gap-5">
                         <div class="p-3 bg-yellow-50 rounded-xl flex-shrink-0">
                             <i data-lucide="gift" class="w-6 h-6 text-brand-primary"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Datas Especiais & Relacionamento</h3>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">Datas Especiais & Relacionamento</h3>
                             <p class="text-gray-700 font-semibold mb-2">Acolhimento que fideliza.</p>
                             <ul class="space-y-1 text-sm text-gray-600">
                                 <li>• Lembra e envia mensagens de aniversários</li>
@@ -569,13 +426,13 @@
                 </div>
 
                 <!-- 8. Rede de Indicações -->
-                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
+                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300">
                     <div class="flex items-start gap-5">
                         <div class="p-3 bg-indigo-50 rounded-xl flex-shrink-0">
                             <i data-lucide="users" class="w-6 h-6 text-brand-primary"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Rede de Indicações</h3>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">Rede de Indicações</h3>
                             <p class="text-gray-700 font-semibold mb-2">Agenda cheia com elegância.</p>
                             <ul class="space-y-1 text-sm text-gray-600">
                                 <li>• Indique colegas</li>
@@ -588,13 +445,13 @@
                 </div>
 
                 <!-- 9. Exclusiva para Estética -->
-                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
+                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300">
                     <div class="flex items-start gap-5">
                         <div class="p-3 bg-teal-50 rounded-xl flex-shrink-0">
                             <i data-lucide="sparkles" class="w-6 h-6 text-brand-primary"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Exclusiva para Estética</h3>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">Exclusiva para Estética</h3>
                             <p class="text-gray-700 font-semibold mb-2">A única assistente treinada para o seu nicho.</p>
                             <ul class="space-y-1 text-sm text-gray-600">
                                 <li>• Respostas com linguagem estética</li>
@@ -607,13 +464,13 @@
                 </div>
 
                 <!-- 10. Identidade & Acolhimento -->
-                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
+                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300">
                     <div class="flex items-start gap-5">
                         <div class="p-3 bg-rose-50 rounded-xl flex-shrink-0">
                             <i data-lucide="heart" class="w-6 h-6 text-brand-primary"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Identidade & Acolhimento</h3>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">Identidade & Acolhimento</h3>
                             <p class="text-gray-700 font-semibold mb-2">Tecnologia que conversa como você.</p>
                             <ul class="space-y-1 text-sm text-gray-600">
                                 <li>• Tom de voz ajustado ao seu estilo</li>
@@ -627,18 +484,70 @@
             </div>
         </div>
     </section>
+    <!-- Resultado Real -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-brand-gradient text-white relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]"></div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-12 tracking-tight">Resultado Real</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 text-left">
+                <div class="space-y-8">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-white/10 p-2 rounded-lg backdrop-blur-sm border border-white/10">
+                            <span class="text-xl font-bold">✓</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1 text-white">Zero Perdas</h4>
+                            <p class="text-purple-100 leading-relaxed text-sm opacity-90">Você deixa de perder cliente por falta de resposta. Cada lead é atendido na hora.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                         <div class="bg-white/10 p-2 rounded-lg backdrop-blur-sm border border-white/10">
+                          <span class="text-xl font-bold">✓</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1 text-white">Eficiência Total</h4>
+                            <p class="text-purple-100 leading-relaxed text-sm opacity-90">Você para de repetir as mesmas informações de preço e local mil vezes por dia.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-8">
+                    <div class="flex items-start gap-4">
+                         <div class="bg-white/10 p-2 rounded-lg backdrop-blur-sm border border-white/10">
+                          <span class="text-xl font-bold">✓</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1 text-white">Pausas Reais</h4>
+                            <p class="text-purple-100 leading-relaxed text-sm opacity-90">Você volta a respirar entre um atendimento e outro, sem correr para o celular.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                         <div class="bg-white/10 p-2 rounded-lg backdrop-blur-sm border border-white/10">
+                          <span class="text-xl font-bold">✓</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1 text-white">Equilíbrio</h4>
+                            <p class="text-purple-100 leading-relaxed text-sm opacity-90">A vida volta ao seu eixo. Sua clínica funciona, você descansa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Planos -->
     <section id="planos" class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16 scroll-reveal">
+            <div class="text-center mb-16">
                 <h2 class="text-3xl sm:text-4xl font-bold text-brand-dark mb-4 tracking-tight">Escolha seu plano Elevare. Sua Tranquilidade é Nossa Prioridade</h2>
                 <p class="text-lg text-gray-600">Tudo que você precisa para vender mais com menos esforço</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-start">
                 <!-- Plano Mensal -->
-                <div class="bg-white rounded-3xl p-8 border border-gray-200 shadow-sm hover:border-brand-primary/30 transition-all duration-300 hover-lift scroll-reveal">
+                <div class="bg-white rounded-3xl p-8 border border-gray-200 shadow-sm hover:border-brand-primary/30 transition-all duration-300">
                     <h3 class="text-2xl font-bold text-brand-dark mb-4">Mensal</h3>
                     <div class="flex items-baseline mb-2">
                         <span class="text-sm font-medium text-gray-600 mr-1">R$</span>
@@ -691,7 +600,7 @@
                 </div>
 
                 <!-- Plano Anual -->
-                <div class="relative bg-white rounded-3xl p-8 border-2 border-brand-primary shadow-2xl shadow-brand-primary/10 transform md:-translate-y-4 hover-lift scroll-reveal">
+                <div class="relative bg-white rounded-3xl p-8 border-2 border-brand-primary shadow-2xl shadow-brand-primary/10 transform md:-translate-y-4">
                     <div class="absolute top-0 right-0 bg-brand-gradient text-white text-[10px] font-bold px-3 py-1.5 rounded-bl-xl rounded-tr-lg uppercase tracking-wider">
                         Mais escolhido
                     </div>
@@ -756,14 +665,13 @@
     <!-- Depoimentos -->
     <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16 scroll-reveal">
-                <h2 class="text-3xl sm:text-4xl font-bold text-brand-dark mb-4 tracking-tight">O que nossas clientes dizem</h2>
-                <p class="text-lg text-gray-600">Histórias reais de transformação</p>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-brand-dark mb-4 tracking-tight">O que nossas clientes dizem: Histórias reais de transformação</h2>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Depoimento 1 -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-brand-lavender transition-all duration-300 hover-lift scroll-reveal">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-brand-lavender transition-all duration-300">
                     <div class="flex justify-center mb-6">
                         <img src="images/julianapegas_opt.jpg" alt="Juliana Pegas - Depoimento Elevare" class="w-24 h-24 rounded-full object-cover border-4 border-brand-lavender shadow-lg" width="96" height="96" loading="lazy">
                     </div>
@@ -781,12 +689,12 @@
                     </div>
                     <div class="border-t border-gray-100 pt-4">
                         <p class="font-bold text-brand-dark">Juliana Pegas</p>
-                        <p class="text-sm text-gray-500">Governador Valadares</p>
+                        <p class="text-sm text-gray-500">Governador Valadares - MG</p>
                     </div>
                 </div>
 
                 <!-- Depoimento 2 -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-brand-lavender transition-all duration-300 hover-lift scroll-reveal">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-brand-lavender transition-all duration-300">
                     <div class="flex justify-center mb-6">
                         <img src="images/grazielatoledo_opt.jpg" alt="Graziela Toledo - Depoimento Elevare" class="w-24 h-24 rounded-full object-cover border-4 border-brand-lavender shadow-lg" width="96" height="96" loading="lazy">
                     </div>
@@ -809,7 +717,7 @@
                 </div>
 
                 <!-- Depoimento 3 -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-brand-lavender transition-all duration-300 hover-lift scroll-reveal">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-brand-lavender transition-all duration-300">
                     <div class="flex justify-center mb-6">
                         <img src="images/tayanabasiley_opt.jpg" alt="Tayana Basiley - Depoimento Elevare" class="w-24 h-24 rounded-full object-cover border-4 border-brand-lavender shadow-lg" width="96" height="96" loading="lazy">
                     </div>
@@ -827,7 +735,7 @@
                     </div>
                     <div class="border-t border-gray-100 pt-4">
                         <p class="font-bold text-brand-dark">Tayana Basiley</p>
-                        <p class="text-sm text-gray-500">Vila Velha</p>
+                        <p class="text-sm text-gray-500">Vila Velha - ES</p>
                     </div>
                 </div>
             </div>
@@ -835,44 +743,52 @@
     </section>
 
     <!-- Quem Somos Final -->
-    <section class="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-brand-primary/5 via-white to-brand-secondary/5">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl sm:text-5xl font-extrabold text-brand-dark mb-8 tracking-tight scroll-reveal">
+    <section class="relative py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-brand-primary/5 via-white to-brand-secondary/5">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl font-bold text-brand-dark mb-8 tracking-tight text-center">
                 Quem Somos
             </h2>
             
-            <!-- Foto Carine Marques -->
-            <div class="flex justify-center mb-10 scroll-reveal">
-                <img src="images/carine_marques_opt.jpg" alt="Carine Marques - Fundadora da Elevare" class="w-48 h-48 rounded-full object-cover border-4 border-brand-primary shadow-2xl" width="192" height="192" loading="lazy">
+            <!-- Layout Lado a Lado -->
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <!-- Foto Carine Marques -->
+                <div class="flex-shrink-0">
+                    <img src="images/carine_marques_opt.jpg" alt="Carine Marques - Fundadora da Elevare" class="w-64 h-64 md:w-80 md:h-80 rounded-2xl object-cover shadow-2xl" width="320" height="320" loading="lazy">
+                </div>
+                
+                <!-- Caixa de Texto Destacada -->
+                <div class="flex-1 bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-xl border border-brand-lavender/30">
+                    <div class="space-y-4 text-lg text-gray-700 leading-relaxed">
+                        <p>
+                            A Elevare é uma plataforma de automação inteligente criada para esteticistas que precisam de eficiência real — não promessas vazias.
+                        </p>
+                        
+                        <p>
+                            Fundada por <span class="font-bold text-brand-primary">Carine Marques</span>, profissional com mais de 20 anos de experiência em estética avançada, a Elevare nasceu onde a tecnologia quase nunca nasce: na rotina.
+                        </p>
+                        
+                        <p class="font-semibold text-brand-dark">
+                            Não foi criada em um escritório de desenvolvedores.
+                        </p>
+                        
+                        <p>
+                            Ganhou forma entre atendimentos, retornos de clientes, atrasos, sobrecarga, cansaço e a necessidade urgente de uma operação que funcionasse sem depender da sua presença o tempo todo.
+                        </p>
+                        
+                        <p class="font-bold text-brand-dark text-xl mt-4">
+                            Foi construída da vida real para a vida real.
+                        </p>
+                        
+                        <p class="text-lg text-brand-primary font-semibold">
+                            E por isso funciona.
+                        </p>
+                    </div>
+                </div>
             </div>
             
-            <div class="space-y-6 text-lg text-gray-700 leading-relaxed mb-12">
-                <p class="scroll-reveal">
-                    A Elevare é uma plataforma de automação inteligente criada para esteticistas que precisam de eficiência real — não promessas vazias.
-                </p>
-                
-                <p class="scroll-reveal">
-                    Fundada por <span class="font-bold text-brand-primary">Carine Marques</span>, profissional com mais de 20 anos de experiência em estética avançada, a Elevare nasceu onde a tecnologia quase nunca nasce: na rotina.
-                </p>
-                
-                <p class="font-semibold text-brand-dark text-xl scroll-reveal">
-                    Não foi criada em um escritório de desenvolvedores.
-                </p>
-                
-                <p class="scroll-reveal">
-                    Ganhou forma entre atendimentos, retornos de clientes, atrasos, sobrecarga, cansaço e a necessidade urgente de uma operação que funcionasse sem depender da sua presença o tempo todo.
-                </p>
-                
-                <p class="font-bold text-brand-dark text-2xl mt-8 scroll-reveal">
-                    Foi construída da vida real para a vida real.
-                </p>
-                
-                <p class="text-xl text-brand-primary scroll-reveal">
-                    E por isso funciona.
-                </p>
-            </div>
+            <div class="text-center mt-8">
             
-            <button class="bg-brand-gradient text-white px-10 py-4 text-lg rounded-full shadow-2xl shadow-brand-primary/30 hover:-translate-y-1 transition-all hover-lift scroll-reveal font-bold">
+            <button class="bg-brand-gradient text-white px-10 py-4 text-lg rounded-full shadow-2xl shadow-brand-primary/30 hover:-translate-y-1 transition-all font-bold">
                 Quero a IARA no meu WhatsApp
                 <i data-lucide="arrow-right" class="ml-2 w-5 h-5 inline"></i>
             </button>
@@ -924,66 +840,25 @@
     </footer>
 
     <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-        
-        // Mobile menu toggle
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // Scroll reveal animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                }
-            });
-        }, observerOptions);
-        
-        document.querySelectorAll('.scroll-reveal').forEach(el => {
-            observer.observe(el);
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-        
-        // Add click handlers for all CTA buttons
-        document.querySelectorAll('button').forEach(button => {
-            const text = button.textContent.toLowerCase();
-            if (text.includes('começar') || text.includes('grátis') || text.includes('iara')) {
-                button.addEventListener('click', (e) => {
+        // Inicializar quando DOM estiver pronto
+        document.addEventListener('DOMContentLoaded', () => {
+            // Icons
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+            
+            // Mobile menu
+            const toggle = document.getElementById('mobile-menu-toggle');
+            const menu = document.getElementById('mobile-menu');
+            if (toggle && menu) toggle.addEventListener('click', () => menu.classList.toggle('hidden'));
+            
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(a => {
+                a.addEventListener('click', e => {
                     e.preventDefault();
-                    if (window.pricingModal) {
-                        window.pricingModal.open();
-                    }
+                    const t = document.querySelector(a.getAttribute('href'));
+                    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
-            }
+            });
         });
-        
-        // Inicializar ícones Lucide quando carregar
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
     </script>
 </body>
 </html>
