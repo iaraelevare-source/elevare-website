@@ -14,21 +14,8 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Animation Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    
     <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    
-    <!-- Shader Background -->
-    <script src="shader-background.js"></script>
-    
-    <!-- Pricing Modal -->
-    <script src="modal-pricing.js"></script>
-    
-    <!-- Main JavaScript for interactions -->
-    <script src="main.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
     
     <script>
         tailwind.config = {
@@ -134,6 +121,34 @@
             position: relative;
             z-index: 1;
         }
+        
+        /* Carrossel Infinito de Estatísticas */
+        .stats-carousel-mask {
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+        }
+        
+        .stats-carousel-track {
+            animation: scroll-stats 20s linear infinite;
+            will-change: transform;
+        }
+        
+        .stats-carousel-track:hover {
+            animation-play-state: paused;
+        }
+        
+        @keyframes scroll-stats {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-320px * 3 - 2rem * 3));
+            }
+        }
+        
+        .stats-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
     </style>
 </head>
 
@@ -186,30 +201,20 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative overflow-hidden pt-32 pb-40 px-4 sm:px-6 lg:px-8">
+    <section class="relative overflow-hidden pt-32 pb-40 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white via-brand-lavender/5 to-white">
         <!-- Decorative Background Blur -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-brand-lavender/20 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-brand-lavender/15 rounded-full blur-[80px] -z-10 pointer-events-none"></div>
 
         <div class="max-w-4xl mx-auto text-center">
-            <!-- Badge -->
-            <div class="inline-flex items-center gap-2 mb-8 px-4 py-1.5 bg-white rounded-full shadow-sm border border-gray-100 animate-fade-in-up">
-                <span class="flex h-2 w-2 rounded-full bg-brand-primary pulse-dot"></span>
-                <span class="text-xs font-semibold text-gray-600 tracking-wide uppercase">Tecnologia para Esteticistas</span>
-            </div>
-            
-            <!-- Headline -->
-            <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-brand-dark mb-8 leading-[1.1] tracking-tighter">
-                Liberte seu tempo, <br/>
-                <span class="text-gradient">sua agenda</span> e sua mente.
+            <!-- Headline Principal -->
+            <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-brand-dark mb-6 leading-[1.1] tracking-tight">
+                Entre tecnologia e toque humano, <br/>
+                <span class="text-gradient">existe a Elevare</span>.
             </h1>
             
             <!-- Subheadline -->
-            <p class="text-xl sm:text-2xl text-brand-text mb-10 max-w-2xl mx-auto leading-relaxed font-light">
-                <span class="font-semibold text-brand-dark">Ela assume o digital.</span> Você assume o seu propósito.
-            </p>
-
-            <p class="text-base sm:text-lg text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
-                Um sistema preciso, elegante e inteligente que conversa com sua cliente como você gostaria: com paciência, clareza e cuidado.
+            <p class="text-xl sm:text-2xl text-gray-700 mb-10 max-w-3xl mx-auto leading-relaxed">
+                O ponto de equilíbrio onde sua rotina descomplica — e sua clínica cresce com propósito.
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
@@ -217,50 +222,89 @@
                     Ative seus 15 dias grátis
                     <i data-lucide="arrow-right" class="ml-2 w-5 h-5 inline"></i>
                 </button>
-                <button class="border border-brand-lavender text-brand-primary px-8 py-4 rounded-full font-medium hover:bg-gray-50 transition-all duration-300 text-lg bg-white hover-lift" onclick="window.pricingModal.open()">
+                <a href="#beneficios" class="border border-brand-lavender text-brand-primary px-8 py-4 rounded-full font-medium hover:bg-gray-50 transition-all duration-300 text-lg bg-white hover-lift inline-flex items-center justify-center">
                     Conhecer IARA
-                </button>
+                </a>
             </div>
 
-            <!-- Estatísticas com Imagens -->
-            <div class="max-w-6xl mx-auto mt-20">
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Estatística 1 -->
-                    <div class="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 hover:border-brand-lavender">
-                        <div class="relative h-48 mb-6 rounded-2xl overflow-hidden">
-                            <img src="images/iara_whatsapp_opt.jpg" alt="IARA WhatsApp - Mais Agendamentos" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <!-- Estatísticas com Carrossel Infinito -->
+            <div class="max-w-7xl mx-auto mt-20 relative">
+                <div class="stats-carousel-mask overflow-hidden">
+                    <div class="stats-carousel-track flex gap-8">
+                        <!-- Estatística 1 -->
+                        <div class="stats-card group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 hover:border-brand-lavender flex-shrink-0 w-80">
+                            <div class="relative h-48 mb-6 rounded-2xl overflow-hidden">
+                                <img src="images/iara_whatsapp_opt.jpg" alt="IARA WhatsApp - Mais Agendamentos" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-5xl font-bold text-brand-primary mb-2">94%</div>
+                                <p class="text-base text-gray-700 font-semibold">Mais agendamentos</p>
+                                <p class="text-sm text-gray-500 mt-2">IARA converte leads 24/7</p>
+                            </div>
                         </div>
-                        <div class="text-center">
-                            <div class="text-5xl font-bold text-brand-primary mb-2">94%</div>
-                            <p class="text-base text-gray-700 font-semibold">Mais agendamentos</p>
-                            <p class="text-sm text-gray-500 mt-2">IARA converte leads 24/7</p>
-                        </div>
-                    </div>
 
-                    <!-- Estatística 2 -->
-                    <div class="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 hover:border-brand-lavender">
-                        <div class="relative h-48 mb-6 rounded-2xl overflow-hidden">
-                            <img src="images/elevare_dashboard_opt.jpg" alt="Elevare Dashboard - Menos Tempo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <!-- Estatística 2 -->
+                        <div class="stats-card group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 hover:border-brand-lavender flex-shrink-0 w-80">
+                            <div class="relative h-48 mb-6 rounded-2xl overflow-hidden">
+                                <img src="images/elevare_dashboard_opt.jpg" alt="Elevare Dashboard - Menos Tempo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-5xl font-bold text-brand-primary mb-2">87%</div>
+                                <p class="text-base text-gray-700 font-semibold">Menos tempo no WhatsApp</p>
+                                <p class="text-sm text-gray-500 mt-2">Foco no que realmente importa</p>
+                            </div>
                         </div>
-                        <div class="text-center">
-                            <div class="text-5xl font-bold text-brand-primary mb-2">87%</div>
-                            <p class="text-base text-gray-700 font-semibold">Menos tempo no WhatsApp</p>
-                            <p class="text-sm text-gray-500 mt-2">Foco no que realmente importa</p>
-                        </div>
-                    </div>
 
-                    <!-- Estatística 3 -->
-                    <div class="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 hover:border-brand-lavender">
-                        <div class="relative h-48 mb-6 rounded-2xl overflow-hidden">
-                            <img src="images/iara_analytics_opt.jpg" alt="IARA Analytics - Menos Erros" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <!-- Estatística 3 -->
+                        <div class="stats-card group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 hover:border-brand-lavender flex-shrink-0 w-80">
+                            <div class="relative h-48 mb-6 rounded-2xl overflow-hidden">
+                                <img src="images/iara_analytics_opt.jpg" alt="IARA Analytics - Menos Erros" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-5xl font-bold text-brand-primary mb-2">91%</div>
+                                <p class="text-base text-gray-700 font-semibold">Menos erros manuais</p>
+                                <p class="text-sm text-gray-500 mt-2">Precisão e confiabilidade</p>
+                            </div>
                         </div>
-                        <div class="text-center">
-                            <div class="text-5xl font-bold text-brand-primary mb-2">91%</div>
-                            <p class="text-base text-gray-700 font-semibold">Menos erros manuais</p>
-                            <p class="text-sm text-gray-500 mt-2">Precisão e confiabilidade</p>
+                        
+                        <!-- Duplicados para loop infinito -->
+                        <div class="stats-card group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 hover:border-brand-lavender flex-shrink-0 w-80">
+                            <div class="relative h-48 mb-6 rounded-2xl overflow-hidden">
+                                <img src="images/iara_whatsapp_opt.jpg" alt="IARA WhatsApp - Mais Agendamentos" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-5xl font-bold text-brand-primary mb-2">94%</div>
+                                <p class="text-base text-gray-700 font-semibold">Mais agendamentos</p>
+                                <p class="text-sm text-gray-500 mt-2">IARA converte leads 24/7</p>
+                            </div>
+                        </div>
+
+                        <div class="stats-card group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 hover:border-brand-lavender flex-shrink-0 w-80">
+                            <div class="relative h-48 mb-6 rounded-2xl overflow-hidden">
+                                <img src="images/elevare_dashboard_opt.jpg" alt="Elevare Dashboard - Menos Tempo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-5xl font-bold text-brand-primary mb-2">87%</div>
+                                <p class="text-base text-gray-700 font-semibold">Menos tempo no WhatsApp</p>
+                                <p class="text-sm text-gray-500 mt-2">Foco no que realmente importa</p>
+                            </div>
+                        </div>
+
+                        <div class="stats-card group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 hover:border-brand-lavender flex-shrink-0 w-80">
+                            <div class="relative h-48 mb-6 rounded-2xl overflow-hidden">
+                                <img src="images/iara_analytics_opt.jpg" alt="IARA Analytics - Menos Erros" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-5xl font-bold text-brand-primary mb-2">91%</div>
+                                <p class="text-base text-gray-700 font-semibold">Menos erros manuais</p>
+                                <p class="text-sm text-gray-500 mt-2">Precisão e confiabilidade</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -269,7 +313,7 @@
     </section>
 
     <!-- O Que Elevare Faz -->
-    <section class="py-24 px-4 sm:px-6 lg:px-8 bg-white border-y border-gray-100">
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white border-y border-gray-100">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-16 scroll-reveal">
                 <h2 class="text-3xl sm:text-4xl font-bold text-brand-dark mb-4 tracking-tight">O que Elevare faz</h2>
@@ -330,7 +374,7 @@
     </section>
 
     <!-- Resultado Real -->
-    <section class="py-24 px-4 sm:px-6 lg:px-8 bg-brand-gradient text-white relative overflow-hidden">
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-brand-gradient text-white relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]"></div>
         
         <div class="max-w-4xl mx-auto text-center relative z-10">
@@ -383,59 +427,200 @@
     </section>
 
     <!-- Como IARA Trabalha -->
-    <section id="beneficios" class="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <section id="beneficios" class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16 scroll-reveal">
-                <span class="text-brand-primary font-bold tracking-wider text-xs uppercase mb-3 block">Features Exclusivas</span>
                 <h2 class="text-3xl sm:text-4xl font-bold text-brand-dark mb-4 tracking-tight">Como a IARA trabalha por você</h2>
                 <p class="text-lg text-gray-600">A assistente inteligente que multiplica conversões</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-6">
+                <!-- 1. Atendimento Inteligente -->
                 <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
                     <div class="flex items-start gap-5">
                         <div class="p-3 bg-brand-mint rounded-xl flex-shrink-0">
-                            <i data-lucide="smartphone" class="w-6 h-6 text-brand-primary"></i>
+                            <i data-lucide="message-circle" class="w-6 h-6 text-brand-primary"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-brand-dark mb-2">Atende como humano</h3>
-                            <p class="text-gray-600 leading-relaxed text-sm">Responde com voz de gente, simula digitação, envia imagem, link e texto — tudo com a sua identidade.</p>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Atendimento Inteligente</h3>
+                            <p class="text-gray-700 font-semibold mb-2">Atende como humano. Entrega como sistema.</p>
+                            <ul class="space-y-1 text-sm text-gray-600">
+                                <li>• Respostas naturais com simulação de digitação</li>
+                                <li>• Envio de imagens, links e textos personalizados</li>
+                                <li>• Comunicação com o seu tom e sua identidade</li>
+                                <li>• Zero confusão, zero repetições</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
+                <!-- 2. Qualificação Automática -->
                 <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
                     <div class="flex items-start gap-5">
                         <div class="p-3 bg-brand-lavender rounded-xl flex-shrink-0">
-                            <i data-lucide="bar-chart-3" class="w-6 h-6 text-brand-primary"></i>
+                            <i data-lucide="user-check" class="w-6 h-6 text-brand-primary"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-brand-dark mb-2">Qualifica clientes</h3>
-                            <p class="text-gray-600 leading-relaxed text-sm">Pronto pra fechar, interessado ou apenas pesquisando — IARA marca prioridades para você agir onde faz diferença.</p>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Qualificação Automática</h3>
+                            <p class="text-gray-700 font-semibold mb-2">Ela entende quem é quem.</p>
+                            <ul class="space-y-1 text-sm text-gray-600">
+                                <li>• Identifica quem está pronto para agendar</li>
+                                <li>• Diferencia curiosidade de interesse real</li>
+                                <li>• Organiza prioridades para você focar onde converte</li>
+                                <li>• Entrega visão clara de quem vale sua ação</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
-                    <div class="flex items-start gap-5">
-                        <div class="p-3 bg-gray-100 rounded-xl flex-shrink-0">
-                            <i data-lucide="zap" class="w-6 h-6 text-brand-primary"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-brand-dark mb-2">Rede de Indicações</h3>
-                            <p class="text-gray-600 leading-relaxed text-sm">Recomende colegas e receba indicações — uma rede que ajuda a preencher agenda sem truque.</p>
-                        </div>
-                    </div>
-                </div>
-
+                <!-- 3. Agendamentos & Organização -->
                 <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
                     <div class="flex items-start gap-5">
                         <div class="p-3 bg-purple-50 rounded-xl flex-shrink-0">
-                            <i data-lucide="shield" class="w-6 h-6 text-brand-primary"></i>
+                            <i data-lucide="calendar-check" class="w-6 h-6 text-brand-primary"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-brand-dark mb-2">Tecnologia econômica</h3>
-                            <p class="text-gray-600 leading-relaxed text-sm">Agendamento automático, mensagens de datas especiais, campanhas — sem custo de API.</p>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Agendamentos & Organização</h3>
+                            <p class="text-gray-700 font-semibold mb-2">Sua agenda funcionando mesmo quando você não está.</p>
+                            <ul class="space-y-1 text-sm text-gray-600">
+                                <li>• Conduz o cliente até o agendamento</li>
+                                <li>• Confirma horários sozinha</li>
+                                <li>• Marca direto no Google Agenda</li>
+                                <li>• Mantém tudo registrado e categorizado</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Cadastro Automático -->
+                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
+                    <div class="flex items-start gap-5">
+                        <div class="p-3 bg-blue-50 rounded-xl flex-shrink-0">
+                            <i data-lucide="user-plus" class="w-6 h-6 text-brand-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Cadastro Automático</h3>
+                            <p class="text-gray-700 font-semibold mb-2">Informação organizada sem trabalho manual.</p>
+                            <ul class="space-y-1 text-sm text-gray-600">
+                                <li>• Cadastra clientes automaticamente</li>
+                                <li>• Armazena dados essenciais</li>
+                                <li>• Cria histórico</li>
+                                <li>• Evita duplicidade ou bagunça</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Recuperação de Conversas -->
+                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
+                    <div class="flex items-start gap-5">
+                        <div class="p-3 bg-green-50 rounded-xl flex-shrink-0">
+                            <i data-lucide="refresh-cw" class="w-6 h-6 text-brand-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Recuperação de Conversas</h3>
+                            <p class="text-gray-700 font-semibold mb-2">Nada fica parado. Nada se perde.</p>
+                            <ul class="space-y-1 text-sm text-gray-600">
+                                <li>• Reativa clientes silenciosos</li>
+                                <li>• Retoma conversas interrompidas</li>
+                                <li>• Resgata orçamentos esquecidos</li>
+                                <li>• Mantém o fluxo sempre vivo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Disparos Estratégicos -->
+                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
+                    <div class="flex items-start gap-5">
+                        <div class="p-3 bg-pink-50 rounded-xl flex-shrink-0">
+                            <i data-lucide="send" class="w-6 h-6 text-brand-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Disparos Estratégicos</h3>
+                            <p class="text-gray-700 font-semibold mb-2">Seu WhatsApp vira uma página de vendas.</p>
+                            <ul class="space-y-1 text-sm text-gray-600">
+                                <li>• Envio de campanhas segmentadas</li>
+                                <li>• Disparos de recuperação</li>
+                                <li>• Mensagens para ofertas, lançamentos e avisos</li>
+                                <li>• Fluxos de conversão contínua — sem custo de API</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Datas Especiais & Relacionamento -->
+                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
+                    <div class="flex items-start gap-5">
+                        <div class="p-3 bg-yellow-50 rounded-xl flex-shrink-0">
+                            <i data-lucide="gift" class="w-6 h-6 text-brand-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Datas Especiais & Relacionamento</h3>
+                            <p class="text-gray-700 font-semibold mb-2">Acolhimento que fideliza.</p>
+                            <ul class="space-y-1 text-sm text-gray-600">
+                                <li>• Lembra e envia mensagens de aniversários</li>
+                                <li>• Datas comemorativas personalizadas</li>
+                                <li>• Mensagens automáticas com sua voz</li>
+                                <li>• Relacionamento caloroso sem esforço</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. Rede de Indicações -->
+                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
+                    <div class="flex items-start gap-5">
+                        <div class="p-3 bg-indigo-50 rounded-xl flex-shrink-0">
+                            <i data-lucide="users" class="w-6 h-6 text-brand-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Rede de Indicações</h3>
+                            <p class="text-gray-700 font-semibold mb-2">Agenda cheia com elegância.</p>
+                            <ul class="space-y-1 text-sm text-gray-600">
+                                <li>• Indique colegas</li>
+                                <li>• Receba indicações</li>
+                                <li>• Rede colaborativa que só fortalece</li>
+                                <li>• Crescimento sem truques</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. Exclusiva para Estética -->
+                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
+                    <div class="flex items-start gap-5">
+                        <div class="p-3 bg-teal-50 rounded-xl flex-shrink-0">
+                            <i data-lucide="sparkles" class="w-6 h-6 text-brand-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Exclusiva para Estética</h3>
+                            <p class="text-gray-700 font-semibold mb-2">A única assistente treinada para o seu nicho.</p>
+                            <ul class="space-y-1 text-sm text-gray-600">
+                                <li>• Respostas com linguagem estética</li>
+                                <li>• Entendimento profundo de protocolos</li>
+                                <li>• Conversa humanizada e profissional</li>
+                                <li>• Precisão que nenhuma IA genérica entrega</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. Identidade & Acolhimento -->
+                <div class="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-lavender transition duration-300 hover-lift scroll-reveal">
+                    <div class="flex items-start gap-5">
+                        <div class="p-3 bg-rose-50 rounded-xl flex-shrink-0">
+                            <i data-lucide="heart" class="w-6 h-6 text-brand-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">🟦 Identidade & Acolhimento</h3>
+                            <p class="text-gray-700 font-semibold mb-2">Tecnologia que conversa como você.</p>
+                            <ul class="space-y-1 text-sm text-gray-600">
+                                <li>• Tom de voz ajustado ao seu estilo</li>
+                                <li>• Comunicação calma, clara e segura</li>
+                                <li>• Elegância na fala e nos fluxos</li>
+                                <li>• Acolhimento automatizado, sem perder o toque humano</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -444,7 +629,7 @@
     </section>
 
     <!-- Planos -->
-    <section id="planos" class="py-24 px-4 sm:px-6 lg:px-8 bg-white">
+    <section id="planos" class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16 scroll-reveal">
                 <h2 class="text-3xl sm:text-4xl font-bold text-brand-dark mb-4 tracking-tight">Escolha seu plano Elevare. Sua Tranquilidade é Nossa Prioridade</h2>
@@ -564,29 +749,12 @@
                 </div>
             </div>
 
-            <!-- Garantia e CTAs -->
-            <div class="text-center mt-16 scroll-reveal">
-                <div class="max-w-3xl mx-auto mb-8">
-                    <p class="text-lg text-gray-700 leading-relaxed">
-                        Você tem acesso imediato. Se não sentir diferença no seu atendimento em 7 dias, basta pedir cancelamento.
-                    </p>
-                </div>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <button class="bg-brand-gradient text-white px-8 py-4 text-lg rounded-full shadow-xl shadow-brand-primary/30 hover:-translate-y-1 transition-all hover-lift">
-                        Começar Agora
-                        <i data-lucide="arrow-right" class="ml-2 w-5 h-5 inline"></i>
-                    </button>
-                    <button class="border-2 border-brand-primary text-brand-primary px-8 py-4 text-lg rounded-full hover:bg-brand-primary hover:text-white transition-all duration-300">
-                        Conversar com Especialista
-                        <i data-lucide="message-circle" class="ml-2 w-5 h-5 inline"></i>
-                    </button>
-                </div>
-            </div>
+
         </div>
     </section>
 
     <!-- Depoimentos -->
-    <section class="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16 scroll-reveal">
                 <h2 class="text-3xl sm:text-4xl font-bold text-brand-dark mb-4 tracking-tight">O que nossas clientes dizem</h2>
@@ -667,25 +835,27 @@
     </section>
 
     <!-- Quem Somos Final -->
-    <section class="relative py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <!-- Canvas Background -->
-        <canvas id="shaderCanvas" class="absolute top-0 left-0 w-full h-full -z-10"></canvas>
-        
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <h2 class="text-4xl sm:text-5xl font-extrabold text-white mb-8 tracking-tight scroll-reveal">
+    <section class="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-brand-primary/5 via-white to-brand-secondary/5">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-brand-dark mb-8 tracking-tight scroll-reveal">
                 Quem Somos
             </h2>
             
-            <div class="space-y-6 text-lg text-white/90 leading-relaxed mb-12">
+            <!-- Foto Carine Marques -->
+            <div class="flex justify-center mb-10 scroll-reveal">
+                <img src="images/carine_marques_opt.jpg" alt="Carine Marques - Fundadora da Elevare" class="w-48 h-48 rounded-full object-cover border-4 border-brand-primary shadow-2xl" width="192" height="192" loading="lazy">
+            </div>
+            
+            <div class="space-y-6 text-lg text-gray-700 leading-relaxed mb-12">
                 <p class="scroll-reveal">
                     A Elevare é uma plataforma de automação inteligente criada para esteticistas que precisam de eficiência real — não promessas vazias.
                 </p>
                 
                 <p class="scroll-reveal">
-                    Fundada por <span class="font-bold text-white">Carine Marques</span>, profissional com mais de 20 anos de experiência em estética avançada, a Elevare nasceu onde a tecnologia quase nunca nasce: na rotina.
+                    Fundada por <span class="font-bold text-brand-primary">Carine Marques</span>, profissional com mais de 20 anos de experiência em estética avançada, a Elevare nasceu onde a tecnologia quase nunca nasce: na rotina.
                 </p>
                 
-                <p class="font-semibold text-white text-xl scroll-reveal">
+                <p class="font-semibold text-brand-dark text-xl scroll-reveal">
                     Não foi criada em um escritório de desenvolvedores.
                 </p>
                 
@@ -693,16 +863,16 @@
                     Ganhou forma entre atendimentos, retornos de clientes, atrasos, sobrecarga, cansaço e a necessidade urgente de uma operação que funcionasse sem depender da sua presença o tempo todo.
                 </p>
                 
-                <p class="font-bold text-white text-2xl mt-8 scroll-reveal">
+                <p class="font-bold text-brand-dark text-2xl mt-8 scroll-reveal">
                     Foi construída da vida real para a vida real.
                 </p>
                 
-                <p class="text-xl text-white scroll-reveal">
+                <p class="text-xl text-brand-primary scroll-reveal">
                     E por isso funciona.
                 </p>
             </div>
             
-            <button class="bg-white text-brand-primary px-10 py-4 text-lg rounded-full shadow-2xl hover:shadow-white/20 hover:-translate-y-1 transition-all hover-lift scroll-reveal font-bold">
+            <button class="bg-brand-gradient text-white px-10 py-4 text-lg rounded-full shadow-2xl shadow-brand-primary/30 hover:-translate-y-1 transition-all hover-lift scroll-reveal font-bold">
                 Quero a IARA no meu WhatsApp
                 <i data-lucide="arrow-right" class="ml-2 w-5 h-5 inline"></i>
             </button>
@@ -810,165 +980,9 @@
             }
         });
         
-        // WebGL Shader Background
-        const canvas = document.getElementById('shaderCanvas');
-        if (canvas) {
-            const gl = canvas.getContext('webgl');
-            if (gl) {
-                const vsSource = `
-                    attribute vec4 aVertexPosition;
-                    void main() {
-                        gl_Position = aVertexPosition;
-                    }
-                `;
-                
-                const fsSource = `
-                    precision highp float;
-                    uniform vec2 iResolution;
-                    uniform float iTime;
-                    
-                    const float overallSpeed = 0.2;
-                    const float gridSmoothWidth = 0.015;
-                    const float axisWidth = 0.05;
-                    const float majorLineWidth = 0.025;
-                    const float minorLineWidth = 0.0125;
-                    const float majorLineFrequency = 5.0;
-                    const float minorLineFrequency = 1.0;
-                    const vec4 gridColor = vec4(0.5);
-                    const float scale = 5.0;
-                    const vec4 lineColor = vec4(0.4, 0.2, 0.8, 1.0);
-                    const float minLineWidth = 0.01;
-                    const float maxLineWidth = 0.2;
-                    const float lineSpeed = 1.0 * overallSpeed;
-                    const float lineAmplitude = 1.0;
-                    const float lineFrequency = 0.2;
-                    const float warpSpeed = 0.2 * overallSpeed;
-                    const float warpFrequency = 0.5;
-                    const float warpAmplitude = 1.0;
-                    const float offsetFrequency = 0.5;
-                    const float offsetSpeed = 1.33 * overallSpeed;
-                    const float minOffsetSpread = 0.6;
-                    const float maxOffsetSpread = 2.0;
-                    const int linesPerGroup = 16;
-                    
-                    float drawCrispLine(float pos, float halfWidth, float t) {
-                        return smoothstep(halfWidth + gridSmoothWidth, halfWidth, abs(pos - t));
-                    }
-                    
-                    float drawSmoothLine(float pos, float halfWidth, float t) {
-                        return smoothstep(halfWidth, 0.0, abs(pos - t));
-                    }
-                    
-                    float drawCircle(vec2 pos, float radius, vec2 coord) {
-                        return smoothstep(radius + gridSmoothWidth, radius, length(coord - pos));
-                    }
-                    
-                    float random(float t) {
-                        return (cos(t) + cos(t * 1.3 + 1.3) + cos(t * 1.4 + 1.4)) / 3.0;
-                    }
-                    
-                    float getPlasmaY(float x, float horizontalFade, float offset) {
-                        return random(x * lineFrequency + iTime * lineSpeed) * horizontalFade * lineAmplitude + offset;
-                    }
-                    
-                    void main() {
-                        vec2 fragCoord = gl_FragCoord.xy;
-                        vec2 uv = fragCoord.xy / iResolution.xy;
-                        vec2 space = (fragCoord - iResolution.xy / 2.0) / iResolution.x * 2.0 * scale;
-                        
-                        float horizontalFade = 1.0 - (cos(uv.x * 6.28) * 0.5 + 0.5);
-                        float verticalFade = 1.0 - (cos(uv.y * 6.28) * 0.5 + 0.5);
-                        
-                        space.y += random(space.x * warpFrequency + iTime * warpSpeed) * warpAmplitude * (0.5 + horizontalFade);
-                        space.x += random(space.y * warpFrequency + iTime * warpSpeed + 2.0) * warpAmplitude * horizontalFade;
-                        
-                        vec4 lines = vec4(0.0);
-                        vec4 bgColor1 = vec4(0.1, 0.1, 0.3, 1.0);
-                        vec4 bgColor2 = vec4(0.3, 0.1, 0.5, 1.0);
-                        
-                        for(int l = 0; l < linesPerGroup; l++) {
-                            float normalizedLineIndex = float(l) / float(linesPerGroup);
-                            float offsetTime = iTime * offsetSpeed;
-                            float offsetPosition = float(l) + space.x * offsetFrequency;
-                            float rand = random(offsetPosition + offsetTime) * 0.5 + 0.5;
-                            float halfWidth = mix(minLineWidth, maxLineWidth, rand * horizontalFade) / 2.0;
-                            float offset = random(offsetPosition + offsetTime * (1.0 + normalizedLineIndex)) * mix(minOffsetSpread, maxOffsetSpread, horizontalFade);
-                            float linePosition = getPlasmaY(space.x, horizontalFade, offset);
-                            float line = drawSmoothLine(linePosition, halfWidth, space.y) / 2.0 + drawCrispLine(linePosition, halfWidth * 0.15, space.y);
-                            
-                            float circleX = mod(float(l) + iTime * lineSpeed, 25.0) - 12.0;
-                            vec2 circlePosition = vec2(circleX, getPlasmaY(circleX, horizontalFade, offset));
-                            float circle = drawCircle(circlePosition, 0.01, space) * 4.0;
-                            
-                            line = line + circle;
-                            lines += line * lineColor * rand;
-                        }
-                        
-                        vec4 fragColor = mix(bgColor1, bgColor2, uv.x);
-                        fragColor *= verticalFade;
-                        fragColor.a = 1.0;
-                        fragColor += lines;
-                        
-                        gl_FragColor = fragColor;
-                    }
-                `;
-                
-                const loadShader = (type, source) => {
-                    const shader = gl.createShader(type);
-                    gl.shaderSource(shader, source);
-                    gl.compileShader(shader);
-                    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-                        console.error('Shader error:', gl.getShaderInfoLog(shader));
-                        gl.deleteShader(shader);
-                        return null;
-                    }
-                    return shader;
-                };
-                
-                const vertexShader = loadShader(gl.VERTEX_SHADER, vsSource);
-                const fragmentShader = loadShader(gl.FRAGMENT_SHADER, fsSource);
-                const shaderProgram = gl.createProgram();
-                gl.attachShader(shaderProgram, vertexShader);
-                gl.attachShader(shaderProgram, fragmentShader);
-                gl.linkProgram(shaderProgram);
-                
-                if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
-                    console.error('Program error:', gl.getProgramInfoLog(shaderProgram));
-                } else {
-                    const positionBuffer = gl.createBuffer();
-                    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-                    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
-                    
-                    const vertexPosition = gl.getAttribLocation(shaderProgram, 'aVertexPosition');
-                    const iResolution = gl.getUniformLocation(shaderProgram, 'iResolution');
-                    const iTime = gl.getUniformLocation(shaderProgram, 'iTime');
-                    
-                    const resizeCanvas = () => {
-                        canvas.width = canvas.offsetWidth;
-                        canvas.height = canvas.offsetHeight;
-                        gl.viewport(0, 0, canvas.width, canvas.height);
-                    };
-                    
-                    window.addEventListener('resize', resizeCanvas);
-                    resizeCanvas();
-                    
-                    const startTime = Date.now();
-                    const render = () => {
-                        const currentTime = (Date.now() - startTime) / 1000;
-                        gl.clearColor(0, 0, 0, 1);
-                        gl.clear(gl.COLOR_BUFFER_BIT);
-                        gl.useProgram(shaderProgram);
-                        gl.uniform2f(iResolution, canvas.width, canvas.height);
-                        gl.uniform1f(iTime, currentTime);
-                        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-                        gl.vertexAttribPointer(vertexPosition, 2, gl.FLOAT, false, 0, 0);
-                        gl.enableVertexAttribArray(vertexPosition);
-                        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-                        requestAnimationFrame(render);
-                    };
-                    requestAnimationFrame(render);
-                }
-            }
+        // Inicializar ícones Lucide quando carregar
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
         }
     </script>
 </body>
