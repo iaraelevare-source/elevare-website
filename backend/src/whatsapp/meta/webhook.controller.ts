@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiExcludeEndpoint } from '@nestjs/swagger';
 import { WhatsAppMetaService } from './meta.service';
+import { IaraCoreService } from '../../iara/core/iara-core.service';
 
 /**
  * Controller de Webhook do WhatsApp Meta API
@@ -36,7 +37,10 @@ import { WhatsAppMetaService } from './meta.service';
 export class WhatsAppWebhookController {
   private readonly logger = new Logger(WhatsAppWebhookController.name);
 
-  constructor(private readonly whatsappService: WhatsAppMetaService) {}
+  constructor(
+    private readonly whatsappService: WhatsAppMetaService,
+    private readonly iaraService: IaraCoreService,
+  ) {}
 
   /**
    * Verificação do webhook (GET)
@@ -199,24 +203,32 @@ export class WhatsAppWebhookController {
 
     this.logger.log(`💬 Conteúdo: ${content}`);
 
-    // TODO: Integrar com IARA (IA conversacional)
-    // await this.iaraService.processMessage({
-    //   from,
-    //   content,
-    //   type,
-    //   timestamp,
-    //   messageId: id,
-    // });
+    // Processar apenas mensagens de texto com IARA
+    if (type === 'text' && content.trim()) {
+      try {
+        // Processar com IARA (IA conversacional)
+        const response = await this.iaraService.processMessage(
+          from, // Usar telefone como leadId temporário
+          content,
+          { phone: from }, // Contexto básico
+        );
 
-    // TODO: Salvar no banco de dados
-    // await this.messageRepository.save({
-    //   externalId: id,
-    //   from,
-    //   content,
-    //   type,
-    //   direction: 'inbound',
-    //   timestamp: new Date(parseInt(timestamp) * 1000),
-    // });
+        // Enviar resposta via WhatsApp
+        await this.whatsappService.sendTextMessage(from, response);
+
+        this.logger.log(`✅ IARA respondeu para ${from}`);
+      } catch (error) {
+        this.logger.error(`❌ Erro ao processar com IARA: ${error.message}`);
+        
+        // Enviar mensagem de fallback
+        await this.whatsappService.sendTextMessage(
+          from,
+          'Desculpe, ocorreu um erro. Um atendente entrará em contato em breve. 😊',
+        );
+      }
+    } else {
+      this.logger.log(`ℹ️  Tipo ${type} não suportado pela IARA, ignorando...`);
+    }
   }
 
   /**

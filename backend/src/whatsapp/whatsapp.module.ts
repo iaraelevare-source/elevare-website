@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { WhatsAppMetaService } from './meta/meta.service';
 import { WhatsAppMockService } from './mock/mock.service';
 import { WhatsAppWebhookController } from './meta/webhook.controller';
+import { IaraModule } from '../iara/iara.module';
 
 /**
  * Módulo de integração com WhatsApp Meta API
@@ -42,6 +43,9 @@ import { WhatsAppWebhookController } from './meta/webhook.controller';
     
     // ConfigModule para acessar variáveis de ambiente
     ConfigModule,
+    
+    // IaraModule para IA conversacional
+    IaraModule,
   ],
   
   controllers: [
