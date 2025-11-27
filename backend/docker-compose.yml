@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  # Banco de dados PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: elevare-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: elevare_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - elevare-network
+
+  # Cache Redis
+  redis:
+    image: redis:7-alpine
+    container_name: elevare-redis
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - elevare-network
+
+  # Aplicação NestJS
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: elevare-api
+    restart: always
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: elevare_db
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: ${JWT_SECRET:-seu_secret_super_seguro_aqui}
+      JWT_EXPIRATION: 7d
+      THROTTLE_TTL: 60
+      THROTTLE_LIMIT: 10
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - elevare-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  elevare-network:
+    driver: bridge
