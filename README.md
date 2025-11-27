@@ -182,8 +182,10 @@ docker-compose up -d
 
 ### 3. Acessar Aplicação
 
-- **Homepage:** http://localhost:8080/index_new.html
+- **Homepage (Landing):** http://localhost:8080/index.html
+- **Homepage SaaS:** http://localhost:8080/index_new.html
 - **Dashboard:** http://localhost:8080/dashboard.html
+- **Status do Projeto:** http://localhost:8080/status.html
 - **API Backend:** http://localhost:3000/api
 - **Swagger Docs:** http://localhost:3000/api/docs
 
@@ -212,6 +214,8 @@ Senha: senha123
 5. **[SCAFFOLD_COMPLETO.md](docs/SCAFFOLD_COMPLETO.md)** - Código scaffoldado
 6. **[CHANGELOG.md](docs/CHANGELOG.md)** - Histórico de mudanças
 7. **[todo.md](docs/todo.md)** - Plano de trabalho
+8. **[PROMPT_VIDEO_IARA.md](docs/PROMPT_VIDEO_IARA.md)** - Prompts para vídeo demonstrativo
+9. **[ANALISE_CODIGO_RUPTURA.txt](docs/ANALISE_CODIGO_RUPTURA.txt)** - Análise da evolução do código
 
 ### API Endpoints
 

@@ -1,0 +1,167 @@
+ PATCHES DE CORREÇÃO CRÍTICA
+Vou gerar os 3 patches essenciais para produção. Execute na ordem:
+1. CORREÇÃO DO ENDPOINT WHATSAPP (CRÍTICO)
+Comando Direto (Linux/macOS):
+bash
+Copy
+# Corrigir endpoint errado no WhatsApp Service
+sed -i '' 's/graph.instagram.com/graph.facebook.com/g' backend/src/modules/whatsapp/whatsapp.service.ts
+
+# Verificar a correção
+grep -n "graph.facebook.com" backend/src/modules/whatsapp/whatsapp.service.ts
+Arquivo de Patch (fix-whatsapp-endpoint.patch):
+diff
+Copy
+--- a/backend/src/modules/whatsapp/whatsapp.service.ts
++++ b/backend/src/modules/whatsapp/whatsapp.service.ts
+@@ -22,7 +22,7 @@ export class WhatsAppService {
+     this.accessToken = configService.get('WHATSAPP_ACCESS_TOKEN');
+ 
+     this.client = axios.create({
+-      baseURL: `https://graph.instagram.com/v18.0/${this.phoneNumberId}/messages`,
++      baseURL: `https://graph.facebook.com/v18.0/${this.phoneNumberId}/messages`,
+       headers: {
+         Authorization: `Bearer ${this.accessToken}`,
+         'Content-Type': 'application/json',
+Impacto: Se não corrigir, 100% das mensagens falharão com erro 404.
+2. ADIÇÃO DE CONSENTIMENTO LGPD NO FLUXO IARA
+Arquivo de Patch (fix-lgpd-consent.patch):
+diff
+Copy
+--- a/IARA_LARA_FLUXOS.md
++++ b/IARA_LARA_FLUXOS.md
+@@ -15,6 +15,18 @@
+       }
+     },
+     {
++      "id": "step-0",
++      "name": "Coletar Consentimento LGPD",
++      "type": "consent",
++      "description": "Coletar consentimento explícito do usuário antes de processar dados",
++      "consentTypes": ["marketing", "data_processing", "whatsapp_contact"],
++      "validation": {
++        "required": true,
++        "minAge": 18
++      },
++      "onRefuse": {
++        "action": "opt_out_and_log"
++      }
++    },
++    {
+       "id": "step-1",
+       "name": "Validar Dados",
+       "type": "validation",
+Código para Implementar (Backend):
+TypeScript
+Copy
+// backend/src/modules/leads/dto/create-lead.dto.ts
+import { IsBoolean, IsNotEmpty } from 'class-validator';
+
+export class CreateLeadDto {
+  // ... campos existentes ...
+
+  @IsBoolean()
+  @IsNotEmpty({ message: 'Consentimento é obrigatório' })
+  consentimentoLGPD: boolean;
+
+  @IsString()
+  consentimentoTimestamp: string; // ISO 8601
+}
+3. RATE LIMITING WHATSAPP (Meta API Limit)
+Arquivo de Patch (fix-rate-limiting.patch):
+diff
+Copy
+--- a/backend/src/modules/whatsapp/whatsapp.service.ts
++++ b/backend/src/modules/whatsapp/whatsapp.service.ts
+@@ -1,5 +1,6 @@
+ import { Injectable, Logger } from '@nestjs/common';
+ import { ConfigService } from '@nestjs/config';
++import { ThrottlerGuard, Throttle } from '@nestjs/throttler';
+ import axios, { AxiosInstance } from 'axios';
+ 
+ @Injectable()
+@@ -45,6 +46,7 @@ export class WhatsAppService {
+     }
+   }
+ 
++  @Throttle({ default: { ttl: 60000, limit: 100 } }) // 100 msg/min
+   async sendTextMessage(to: string, text: string): Promise<string> {
+     try {
+       this.logger.debug(`Sending text message to ${to}`);
+@@ -70,6 +72,7 @@ export class WhatsAppService {
+     }
+   }
+ 
++  @Throttle({ default: { ttl: 60000, limit: 100 } })
+   async sendTemplateMessage(
+     to: string,
+     templateName: string,
+@@ -103,6 +106,7 @@ export class WhatsAppService {
+     }
+   }
+ 
++  @Throttle({ default: { ttl: 60000, limit: 100 } })
+   async sendInteractiveMessage(
+     to: string,
+     headerText: string,
+Configuração no App Module:
+TypeScript
+Copy
+// backend/src/app.module.ts
+import { ThrottlerModule } from '@nestjs/throttler';
+
+@Module({
+  imports: [
+    ThrottlerModule.forRoot([{
+      ttl: 60000, // 1 minuto
+      limit: 100, // 100 requisições
+    }]),
+  ],
+})
+export class AppModule {}
+4. SCRIPT DE VALIDAÇÃO DAS CORREÇÕES
+validate-fixes.sh
+bash
+Copy
+#!/bin/bash
+
+echo "🔍 Validando Correções..."
+
+# 1. Verificar endpoint WhatsApp
+if grep -q "graph.facebook.com" backend/src/modules/whatsapp/whatsapp.service.ts; then
+  echo "✅ WhatsApp endpoint: CORRETO"
+else
+  echo "❌ WhatsApp endpoint: ERRADO"
+  exit 1
+fi
+
+# 2. Verificar LGPD no fluxo
+if grep -q "Coletar Consentimento LGPD" IARA_LARA_FLUXOS.md; then
+  echo "✅ LGPD Consent: IMPLEMENTADO"
+else
+  echo "❌ LGPD Consent: FALTANDO"
+  exit 1
+fi
+
+# 3. Verificar rate limiting
+if grep -q "@Throttle" backend/src/modules/whatsapp/whatsapp.service.ts; then
+  echo "✅ Rate Limiting: CONFIGURADO"
+else
+  echo "❌ Rate Limiting: FALTANDO"
+  exit 1
+fi
+
+echo "🎉 Todas as correções aplicadas com sucesso!"
+Comando para executar:
+bash
+Copy
+chmod +x validate-fixes.sh
+./validate-fixes.sh
+5. RESUMO EXECUTIVO DAS CORREÇÕES
+Table
+Copy
+Problema	Severidade	Status	Arquivo Afetado
+Endpoint WhatsApp errado	🔴 P0	✅ Corrigido	whatsapp.service.ts
+Falta consentimento LGPD	🔴 P0	✅ Adicionado	IARA_LARA_FLUXOS.md
+Sem rate limiting	🟠 P1	✅ Configurado	whatsapp.service.ts
+Tempo estimado para aplicar todos os patches: 15 minutos
