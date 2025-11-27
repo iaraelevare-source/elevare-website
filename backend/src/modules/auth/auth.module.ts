@@ -9,6 +9,8 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
 import { User } from '../../database/entities/user.entity';
 import { Clinic } from '../../database/entities/clinic.entity';
+import { TwoFactorService } from './two-factor.service';
+import { TwoFactorController } from './two-factor.controller';
 
 /**
  * Módulo de autenticação
@@ -29,8 +31,8 @@ import { Clinic } from '../../database/entities/clinic.entity';
       }),
     }),
   ],
-  controllers: [AuthController],
-  providers: [AuthService, JwtStrategy, LocalStrategy],
-  exports: [AuthService],
+  controllers: [AuthController, TwoFactorController],
+  providers: [AuthService, TwoFactorService, JwtStrategy, LocalStrategy],
+  exports: [AuthService, TwoFactorService],
 })
 export class AuthModule {}

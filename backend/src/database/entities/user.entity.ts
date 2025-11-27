@@ -57,4 +57,15 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  // Campos de Autenticação de Dois Fatores (2FA)
+  @Column({ nullable: true, select: false })
+  @Exclude() // Nunca expor o secret na API
+  tfaSecret?: string;
+
+  @Column({ default: false })
+  tfaEnabled: boolean;
+
+  @Column({ type: 'timestamp', nullable: true })
+  lastLoginAt?: Date;
 }

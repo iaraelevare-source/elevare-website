@@ -53,8 +53,32 @@ export class AuthService {
    * @returns Token JWT e dados do usuário
    */
   @Audit({ action: 'LOGIN', entity: 'User' })
-  async login(user: any): Promise<AuthResponseDto> {
+  async login(user: any): Promise<AuthResponseDto | any> {
     const payload = { email: user.email, sub: user.id, role: user.role };
+    
+    // Verificar se usuário tem 2FA ativado
+    const fullUser = await this.userRepository.findOne({
+      where: { id: user.id },
+      select: ['id', 'email', 'tfaEnabled'],
+    });
+
+    // Se 2FA está ativado, exige token antes de gerar JWT final
+    if (fullUser?.tfaEnabled) {
+      return {
+        message: '2FA required',
+        requires2FA: true,
+        // Token temporário válido por 5 minutos para submeter o token 2FA
+        tempToken: this.jwtService.sign(
+          { ...payload, is2FATemp: true },
+          { expiresIn: '5m' },
+        ),
+      };
+    }
+
+    // Atualizar lastLoginAt
+    await this.userRepository.update(user.id, {
+      lastLoginAt: new Date(),
+    });
     
     return {
       access_token: this.jwtService.sign(payload),
