@@ -12,9 +12,9 @@
  */
 
 export const IaraConfig = {
-  // Modelo GPT-4 (mais inteligente, mais caro)
-  // Alternativa: gpt-3.5-turbo (mais rápido, mais barato)
-  model: 'gpt-4-turbo-preview',
+  // Modelo GPT-3.5 Turbo (mais rápido, mais barato)
+  // Alternativa: gpt-4-turbo-preview (mais inteligente, mais caro)
+  model: 'gpt-3.5-turbo',
 
   // Temperatura (0-1): quanto maior, mais criativo
   // 0.7 = equilíbrio entre criatividade e consistência
