@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
+import { Audit } from '../../audit/decorators/audit.decorator';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Lead } from '../../database/entities/lead.entity';
@@ -23,6 +24,7 @@ export class LeadsService {
    * @param clinicId - ID da clínica do usuário
    * @returns Lead criado
    */
+  @Audit({ action: 'CREATE_LEAD', entity: 'Lead' })
   async create(createLeadDto: CreateLeadDto, userId: string, clinicId: string): Promise<Lead> {
     const lead = this.leadRepository.create({
       ...createLeadDto,
@@ -73,6 +75,7 @@ export class LeadsService {
    * @param clinicId - ID da clínica do usuário
    * @returns Lead atualizado
    */
+  @Audit({ action: 'UPDATE_LEAD', entity: 'Lead' })
   async update(id: string, updateLeadDto: UpdateLeadDto, clinicId: string): Promise<Lead> {
     const lead = await this.findOne(id, clinicId);
 
@@ -85,6 +88,7 @@ export class LeadsService {
    * @param id - ID do lead
    * @param clinicId - ID da clínica do usuário
    */
+  @Audit({ action: 'DELETE_LEAD', entity: 'Lead' })
   async remove(id: string, clinicId: string): Promise<void> {
     const lead = await this.findOne(id, clinicId);
     await this.leadRepository.remove(lead);

@@ -1,4 +1,5 @@
 import { Injectable, ConflictException, UnauthorizedException } from '@nestjs/common';
+import { Audit } from '../../audit/decorators/audit.decorator';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
@@ -51,6 +52,7 @@ export class AuthService {
    * @param user - Dados do usuário autenticado
    * @returns Token JWT e dados do usuário
    */
+  @Audit({ action: 'LOGIN', entity: 'User' })
   async login(user: any): Promise<AuthResponseDto> {
     const payload = { email: user.email, sub: user.id, role: user.role };
     
@@ -71,6 +73,7 @@ export class AuthService {
    * @param registerDto - Dados do usuário a ser registrado
    * @returns Token JWT e dados do usuário criado
    */
+  @Audit({ action: 'REGISTER', entity: 'User' })
   async register(registerDto: RegisterDto): Promise<AuthResponseDto> {
     // Verifica se o email já está em uso
     const existingUser = await this.userRepository.findOne({

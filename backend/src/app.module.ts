@@ -9,6 +9,7 @@ import { LeadsModule } from './modules/leads/leads.module';
 import { AgendamentosModule } from './modules/agendamentos/agendamentos.module';
 import { MonitoringModule } from './monitoring/monitoring.module';
 import { LgpdModule } from './lgpd/lgpd.module';
+import { AuditModule } from './audit/audit.module';
 
 /**
  * Módulo principal da aplicação
@@ -40,6 +41,7 @@ import { LgpdModule } from './lgpd/lgpd.module';
     AgendamentosModule,
     MonitoringModule,
     LgpdModule,
+    AuditModule,
   ],
   controllers: [],
   providers: [],
