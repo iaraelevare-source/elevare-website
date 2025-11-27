@@ -1,0 +1,13 @@
+apiVersion: 1
+
+# Configuração de provisioning de dashboards
+providers:
+  - name: 'Elevare Dashboards'
+    orgId: 1
+    folder: ''
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards

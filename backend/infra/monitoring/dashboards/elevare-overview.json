@@ -1,0 +1,209 @@
+{
+  "dashboard": {
+    "title": "Elevare - Overview",
+    "tags": ["elevare", "overview"],
+    "timezone": "browser",
+    "schemaVersion": 16,
+    "version": 0,
+    "refresh": "10s",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Total de Leads Recebidos",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "sum(elevare_leads_received_total)",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": 2,
+        "title": "Taxa de Conversão",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "(sum(elevare_leads_converted_total) / sum(elevare_leads_received_total)) * 100",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 6,
+          "y": 0
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent"
+          }
+        }
+      },
+      {
+        "id": 3,
+        "title": "Mensagens WhatsApp Enviadas",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "sum(elevare_whatsapp_messages_sent_total)",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 12,
+          "y": 0
+        }
+      },
+      {
+        "id": 4,
+        "title": "Mensagens IARA Processadas",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "sum(elevare_iara_messages_processed_total)",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 18,
+          "y": 0
+        }
+      },
+      {
+        "id": 5,
+        "title": "Leads por Origem (Últimas 24h)",
+        "type": "piechart",
+        "targets": [
+          {
+            "expr": "sum by (origem) (increase(elevare_leads_received_total[24h]))",
+            "refId": "A",
+            "legendFormat": "{{origem}}"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 4
+        }
+      },
+      {
+        "id": 6,
+        "title": "Distribuição de Score de Leads",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.5, sum(rate(elevare_leads_score_distribution_bucket[5m])) by (le))",
+            "refId": "A",
+            "legendFormat": "Mediana"
+          },
+          {
+            "expr": "histogram_quantile(0.95, sum(rate(elevare_leads_score_distribution_bucket[5m])) by (le))",
+            "refId": "B",
+            "legendFormat": "P95"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 4
+        }
+      },
+      {
+        "id": 7,
+        "title": "Latência de API WhatsApp",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.99, sum(rate(elevare_whatsapp_api_latency_seconds_bucket[5m])) by (le, endpoint))",
+            "refId": "A",
+            "legendFormat": "{{endpoint}} (P99)"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 12
+        },
+        "yaxes": [
+          {
+            "format": "s",
+            "label": "Latência"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Tokens IARA Usados (Últimas 24h)",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "sum by (model) (increase(elevare_iara_tokens_used_total[24h]))",
+            "refId": "A",
+            "legendFormat": "{{model}}"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 12
+        }
+      },
+      {
+        "id": 9,
+        "title": "Taxa de Erro HTTP",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "sum(rate(elevare_http_requests_total{status=~\"5..\"}[5m])) / sum(rate(elevare_http_requests_total[5m])) * 100",
+            "refId": "A",
+            "legendFormat": "Erro 5xx"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 20
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent"
+          }
+        }
+      },
+      {
+        "id": 10,
+        "title": "Requisições HTTP por Segundo",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "sum(rate(elevare_http_requests_total[1m]))",
+            "refId": "A",
+            "legendFormat": "RPS Total"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 20
+        }
+      }
+    ]
+  }
+}

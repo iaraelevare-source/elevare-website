@@ -7,6 +7,7 @@ import { typeOrmConfig } from './config/database.config';
 import { AuthModule } from './modules/auth/auth.module';
 import { LeadsModule } from './modules/leads/leads.module';
 import { AgendamentosModule } from './modules/agendamentos/agendamentos.module';
+import { MonitoringModule } from './monitoring/monitoring.module';
 
 /**
  * Módulo principal da aplicação
@@ -36,6 +37,7 @@ import { AgendamentosModule } from './modules/agendamentos/agendamentos.module';
     AuthModule,
     LeadsModule,
     AgendamentosModule,
+    MonitoringModule,
   ],
   controllers: [],
   providers: [],
