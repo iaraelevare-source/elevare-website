@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
 import { ConfigModule } from '@nestjs/config';
 import { WhatsAppMetaService } from './meta/meta.service';
+import { WhatsAppMockService } from './mock/mock.service';
 import { WhatsAppWebhookController } from './meta/webhook.controller';
 
 /**
@@ -48,11 +49,19 @@ import { WhatsAppWebhookController } from './meta/webhook.controller';
   ],
   
   providers: [
-    WhatsAppMetaService, // Serviço principal
+    // ✅ MOCK: Grátis para MVP (use Evolution API)
+    WhatsAppMockService,
+    
+    // 🔄 META: Pago, para produção (descomente quando tiver tráfego)
+    // WhatsAppMetaService,
   ],
   
   exports: [
-    WhatsAppMetaService, // Exportar para uso em outros módulos
+    // ✅ MOCK: Grátis para MVP
+    WhatsAppMockService,
+    
+    // 🔄 META: Pago, para produção
+    // WhatsAppMetaService,
   ],
 })
 export class WhatsAppModule {}
