@@ -10,6 +10,7 @@ import { AgendamentosModule } from './modules/agendamentos/agendamentos.module';
 import { MonitoringModule } from './monitoring/monitoring.module';
 import { LgpdModule } from './lgpd/lgpd.module';
 import { AuditModule } from './audit/audit.module';
+import { WhatsAppModule } from './whatsapp/whatsapp.module';
 
 /**
  * Módulo principal da aplicação
@@ -42,6 +43,7 @@ import { AuditModule } from './audit/audit.module';
     MonitoringModule,
     LgpdModule,
     AuditModule,
+    WhatsAppModule,
   ],
   controllers: [],
   providers: [],
